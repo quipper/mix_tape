@@ -2,7 +2,7 @@
 
 ## The Problem
 
-Littering controllers with MixPanel events passing large payloads adds to the wait and concern of controllers. It also makes it difficult to keep on top of what triggers already exist.
+Littering controllers with MixPanel events with large param payloads. This makes it difficult to keep on top of what triggers already exist, and isn't DRY.
 
 This gem proposes a DSL for specifying your events in advance, and keeping them in a single file.
 
