@@ -6,8 +6,8 @@ require 'mix_tape/version'
 Gem::Specification.new do |spec|
   spec.name          = "mix_tape"
   spec.version       = MixTape::VERSION
-  spec.authors       = []
-  spec.email         = []
+  spec.authors       = ['Omar Sahyoun']
+  spec.email         = ['omar@quipper.com']
   spec.description   = %q{Tidy up your mixpanel commits}
   spec.summary       = %q{Tidy up your mixpanel commits}
   spec.homepage      = ""
