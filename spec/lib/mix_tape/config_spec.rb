@@ -10,11 +10,22 @@ describe 'Configuraton' do
   end
 
   it "raises when token not defined" do
-    MixTape.config{ |config|config.token = '' }
+    MixTape.config{ |config| config.token = '' }
 
     expect{
       MixTape.client
     }.to raise_error("MixPanel token is undefined.")
   end
-end
 
+  it "uses MixPanel if all goes well" do
+    MixTape.config{ |config| config.token = '1234' }
+
+    expect(MixTape.client).to be_a Mixpanel::Tracker
+  end
+
+  it "uses FakeTracker if we set it up" do
+    MixTape.config{ |config| config.fake = true }
+
+    expect(MixTape.client).to be_a MixTape::FakeTracker
+  end
+end
