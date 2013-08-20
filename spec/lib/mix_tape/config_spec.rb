@@ -8,5 +8,13 @@ describe 'Configuraton' do
 
     expect(MixTape.token).to eq('1234')
   end
+
+  it "raises when token not defined" do
+    MixTape.config{ |config|config.token = '' }
+
+    expect{
+      MixTape.client
+    }.to raise_error("MixPanel token is undefined.")
+  end
 end
 

@@ -17,18 +17,12 @@ module MixTape
       @@mix_tape << [name, desc]
 
       MixTape.define_singleton_method("track_#{name}") do |*args|
-        MixTape.client.track name.to_s, properties(*args)
+        MixTape.client.track name.to_s, yield(*args)
       end
 
       MixTape.define_singleton_method("set_#{name}") do |id, *args|
-        MixTape.client.set id, properties(*args)
+        MixTape.client.set id, yield(*args)
       end
-    end
-
-    private
-
-    def properties(*args)
-      yield(*args)
     end
 
     def method_missing(key, *arguments, &block)

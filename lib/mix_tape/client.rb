@@ -4,6 +4,7 @@ module MixTape
     attr_accessor :token
 
     def client
+      raise(ArgumentError, %{MixPanel token is undefined.}) if token.empty?
       @client ||= Mixpanel::Tracker.new(token, async: true)
     end
 
