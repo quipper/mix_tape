@@ -2,19 +2,18 @@
 
 ## The Problem
 
-Littering controllers with MixPanel events with large param payloads. This makes it difficult to keep on top of what triggers already exist, and isn't DRY.
+Littering controllers with MixPanel events with large param payloads isn't a nice thing to do.
 
-This gem proposes a DSL for specifying your events in advance, and keeping them in a single file.
+`MixTape` tries to help by creating a DSL for specifying your events in advance, and keeping them in a single file.
 
-### Defining your Events
-
+## Defining your Events
 
     MixTape::Builder.definition do
 
       button_click "Log number of times user clicks button" do |user, button|
         {
           user_name:   user.username,
-          user_id:     user.id,
+          distinct_id: user.id,
           button_id:   button.id,
           button_page: button.page
         }
@@ -22,6 +21,7 @@ This gem proposes a DSL for specifying your events in advance, and keeping them 
 
       checks_mail "User just checked their mail" do |user, inbox|
         {
+          distinct_id: user.id,
           user_name:    user.username,
           user_id:      user.id,
           unread_count: inbox.count
@@ -30,6 +30,7 @@ This gem proposes a DSL for specifying your events in advance, and keeping them 
 
       user_invites_friend "User has invited a friend" do |user, friend|
         {
+          distinct_id: user.id,
           user_name:    user.username,
           user_id:      user.id,
           friend_name:  friend.name
@@ -38,22 +39,19 @@ This gem proposes a DSL for specifying your events in advance, and keeping them 
     end
 
 
-To trigger a defined event call:
+To track a defined event:
 
+    MixTape.track_user_invites_friend(user, friend)
 
-    MixTape.trigger_user_invites_friend(user, friend)
+To update an existing event object:
 
+    MixTape.set_user_invites_friend(user, friend)
 
-### TODO
+## Available Events
 
-A rake task for presenting all available events with descriptions.
+To view defined events:
 
-    rake tape_mix:events
-
-    trigger_button_click
-        Log number of times user clicks button
-
-    ...
+    rake mix_tape:events
 
 ## Installation
 
@@ -68,8 +66,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install mix_tape
-
-## Usage
 
 
 ## Contributing
