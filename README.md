@@ -65,6 +65,13 @@ Don't forget to set your MixPanel API token:
       config.token =  '12345'
     end
 
+If you are in a dev or test environment and don't want to send events to MixPanel:
+
+    MixTape.config do |config|
+      config.fake = true
+      config.console_logging = true
+    end
+
 And then execute:
 
     $ bundle
