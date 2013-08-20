@@ -59,6 +59,12 @@ Add this line to your application's Gemfile:
 
     gem 'mix_tape'
 
+Don't forget to set your MixPanel API token:
+
+    MixTape.config do |config|
+      config.token =  '12345'
+    end
+
 And then execute:
 
     $ bundle
