@@ -72,6 +72,14 @@ If you are in a dev or test environment and don't want to send events to MixPane
       config.console_logging = true
     end
 
+If you want Mixpanel to use your request variables to track user's location etc, then add this to your application controller:
+
+    before_filter :update_mixtape_request
+
+    def update_mixtape_request
+      MixTape.request = request
+    end
+
 And then execute:
 
     $ bundle
