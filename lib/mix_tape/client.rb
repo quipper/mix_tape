@@ -9,7 +9,7 @@ module MixTape
     end
 
     def config(&block)
-      instance_eval &block
+      instance_eval(&block)
     end
 
     private
@@ -20,16 +20,6 @@ module MixTape
       else
         Mixpanel::Tracker.new(token)
       end
-    end
-
-    def env
-      e = @request.is_a?(Hash) ? @request : @request.env
-      {
-        'REMOTE_ADDR' => e['REMOTE_ADDR'],
-        'HTTP_X_FORWARDED_FOR' => e['HTTP_X_FORWARDED_FOR'],
-        'rack.session' => e['rack.session'],
-        'mixpanel_events' => e['mixpanel_events']
-      }
     end
   end
 end
