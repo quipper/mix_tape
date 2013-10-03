@@ -18,7 +18,7 @@ module MixTape
       if !!fake
         FakeTracker.new(console_logging)
       else
-        Mixpanel::Tracker.new(token, async: true, env: @request ? env : {})
+        Mixpanel::Tracker.new(token)
       end
     end
 

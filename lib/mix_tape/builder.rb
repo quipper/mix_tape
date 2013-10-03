@@ -17,7 +17,9 @@ module MixTape
       @@mix_tape << [name, desc]
 
       MixTape.define_singleton_method("track_#{name}") do |*args|
-        MixTape.client.track name.to_s, yield(*args)
+        data = yield(*args)
+        distinct_id = data.delete(:distinct_id)
+        MixTape.client.track distinct_id, name.to_s, data
       end
 
       MixTape.define_singleton_method("set_#{name}") do |id, *args|
