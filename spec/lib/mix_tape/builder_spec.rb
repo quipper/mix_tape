@@ -30,9 +30,9 @@ describe "Triggering Events" do
   end
 
   it "tracks" do
-    expected_properties =  { user_name: "Zeus", distinct_id: "1", button_id: "2", button_page: "homepage" }
+    expected_properties =  { user_name: "Zeus", button_id: "2", button_page: "homepage" }
 
-    client.should_receive(:track).with("button_click", expected_properties)
+    client.should_receive(:track).with("1", "button_click", expected_properties)
     MixTape.track_button_click(user, button)
   end
 

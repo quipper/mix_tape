@@ -33,15 +33,7 @@ describe 'Configuraton' do
     MixTape.config{ |config| config.token = '1234'; config.fake = false }
     MixTape.request = double(:http_request, env: { 'REMOTE_ADDR' => '127.0.0.1' })
 
-    Mixpanel::Tracker.should_receive(:new).with('1234', {
-        async: true,
-        env: {
-            'REMOTE_ADDR' => '127.0.0.1',
-            'HTTP_X_FORWARDED_FOR' => nil,
-            'rack.session' => nil,
-            'mixpanel_events' => nil
-        }
-    })
+    Mixpanel::Tracker.should_receive(:new).with('1234')
 
     MixTape.client
   end
