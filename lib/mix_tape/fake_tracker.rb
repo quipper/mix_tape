@@ -7,8 +7,8 @@ module MixTape
       @console_logging = console_logging
     end
 
-    def track(name, args={})
-      puts "FakeTracker.track #{name}, #{args}" if console_logging
+    def track(distinct_id, name, args={})
+      puts "FakeTracker.track #{distinct_id}, #{name}, #{args}" if console_logging
     end
 
     def set(name, args={})
