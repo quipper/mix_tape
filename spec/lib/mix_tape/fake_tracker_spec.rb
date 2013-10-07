@@ -13,7 +13,7 @@ describe 'FakeTracker' do
 
     it "logs set events to the console" do
       Object.any_instance.should_receive(:puts)
-      client.set 1
+      client.people.set 1
     end
   end
 
@@ -23,7 +23,7 @@ describe 'FakeTracker' do
     it "does not log anything" do
       Object.any_instance.should_not_receive(:puts)
       client.track distinct_id, "button_click"
-      client.set 1
+      client.people.set 1
     end
   end
 end
