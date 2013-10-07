@@ -1,17 +1,19 @@
 require 'spec_helper'
 
 describe 'FakeTracker' do
+  let(:distinct_id) { 1 }
+
   context 'logging' do
     let(:client) { MixTape::FakeTracker.new(true) }
 
     it "logs track events to the console" do
       Object.any_instance.should_receive(:puts)
-      client.track "button_click"
+      client.track distinct_id, "button_click"
     end
 
     it "logs set events to the console" do
       Object.any_instance.should_receive(:puts)
-      client.set 1
+      client.people.set 1
     end
   end
 
@@ -20,8 +22,8 @@ describe 'FakeTracker' do
 
     it "does not log anything" do
       Object.any_instance.should_not_receive(:puts)
-      client.track "button_click"
-      client.set 1
+      client.track distinct_id, "button_click"
+      client.people.set 1
     end
   end
 end
