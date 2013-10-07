@@ -23,7 +23,7 @@ end
 describe "Triggering Events" do
   let(:user)   { double(username: 'Zeus', id: '1') }
   let(:button) { double(id: '2', page: 'homepage') }
-  let(:client) { double('client') }
+  let(:client) { double('client', people: double) }
 
   before do
     MixTape.stub(:client){ client }
@@ -39,7 +39,7 @@ describe "Triggering Events" do
   it "sets" do
     expected_properties =  { user_name: "Zeus", distinct_id: "1", button_id: "2", button_page: "homepage" }
 
-    client.should_receive(:set).with("1", expected_properties)
+    client.people.should_receive(:set).with("1", expected_properties)
     MixTape.set_button_click(user.id, user, button)
   end
 end
