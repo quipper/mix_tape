@@ -23,7 +23,10 @@ module MixTape
       end
 
       MixTape.define_singleton_method("set_#{name}") do |id, *args|
-        MixTape.client.people.set id, yield(*args)
+        args = yield(*args)
+        ip = args['$ip'] || args[:$ip] || args[:ip]
+
+        MixTape.client.people.set id, args, ip
       end
     end
 

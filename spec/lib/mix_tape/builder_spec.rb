@@ -7,7 +7,8 @@ MixTape::Builder.definition do
       user_name:    user.username,
       distinct_id:  user.id,
       button_id:    button.id,
-      button_page:  button.page
+      button_page:  button.page,
+      ip:           '127.0.0.1'
     }
   end
 
@@ -30,16 +31,16 @@ describe "Triggering Events" do
   end
 
   it "tracks" do
-    expected_properties =  { user_name: "Zeus", button_id: "2", button_page: "homepage" }
+    expected_properties =  { user_name: "Zeus", button_id: "2", button_page: "homepage", ip: '127.0.0.1' }
 
     client.should_receive(:track).with("1", "button_click", expected_properties)
     MixTape.track_button_click(user, button)
   end
 
   it "sets" do
-    expected_properties =  { user_name: "Zeus", distinct_id: "1", button_id: "2", button_page: "homepage" }
+    expected_properties =  { user_name: "Zeus", distinct_id: "1", button_id: "2", button_page: "homepage", ip: '127.0.0.1' }
 
-    client.people.should_receive(:set).with("1", expected_properties)
+    client.people.should_receive(:set).with("1", expected_properties, '127.0.0.1')
     MixTape.set_button_click(user.id, user, button)
   end
 end

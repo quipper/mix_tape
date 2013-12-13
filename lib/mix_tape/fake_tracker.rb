@@ -22,8 +22,8 @@ module MixTape
         @console_logging = console_logging
       end
 
-      def set(name, args={})
-        puts "FakeTracker.set #{name}, #{args}" if console_logging
+      def set(name, args={}, ip=nil)
+        puts "FakeTracker.set #{name}, #{args}, #{ip}" if console_logging
       end
     end
   end
